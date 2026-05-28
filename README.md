@@ -226,3 +226,7 @@ python -m unittest discover -s tests
 - 建议把容器绑定到 `127.0.0.1`，再由反向代理提供 HTTPS。
 - 定期备份 `data/` 和 `tokens/`，但不要上传到公开仓库。
 - 不要在 issue、日志或截图中公开邮箱 refresh token、OpenAI token、管理密钥或真实账号密码。
+
+## 友情链接
+
+- [Linux.do](https://linux.do/)
