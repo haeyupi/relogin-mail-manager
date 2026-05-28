@@ -1,0 +1,38 @@
+{
+  "mail_db": {
+    "path": "data/mail_accounts.sqlite3"
+  },
+  "target": {
+    "provider": "",
+    "base_url": "",
+    "management_key": "",
+    "request_timeout": 45,
+    "poll_timeout": 120,
+    "poll_interval": 1,
+    "sub2api_concurrency": 3,
+    "sub2api_priority": 50
+  },
+  "web": {
+    "host": "127.0.0.1",
+    "port": 8787,
+    "password": ""
+  },
+  "chatgpt": {
+    "auth_base_url": "https://auth.openai.com",
+    "codex_client_id": "app_EMoamEEZ73f0CkXaXp7hrann",
+    "prefer_one_time_code": true
+  },
+  "timeouts": {
+    "email_poll": 120,
+    "poll_interval": 3,
+    "sentinel_token": 90,
+    "mail_reader_request": 30
+  },
+  "output": {
+    "directory": "."
+  },
+  "http": {
+    "user_agent_chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/148.0.0.0 Safari/537.36",
+    "accept_language": "en-US,en;q=0.9"
+  }
+}

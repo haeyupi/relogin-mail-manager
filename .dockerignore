@@ -1,0 +1,12 @@
+.git
+__pycache__/
+*.pyc
+.venv/
+.runtime/
+.env
+*.log
+config.json
+data/
+tokens/
+success/
+fail/

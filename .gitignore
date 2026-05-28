@@ -1,0 +1,11 @@
+config.json
+.env
+*.log
+sentinel_cache.json
+success/
+fail/
+tokens/
+data/
+__pycache__/
+.venv/
+.runtime/
