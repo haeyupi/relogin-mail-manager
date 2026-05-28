@@ -10,7 +10,8 @@ Relogin Mail Manager 是一个本地化的 OpenAI/Codex 重新登录工具。它
 - 直接读取 Outlook/Hotmail 邮箱验证码：优先 Microsoft Graph，失败后回退 IMAP。
 - 重新登录 OpenAI/Codex，并保存新的 token 文件。
 - 支持 CPA 或 Sub2API 作为远端目标，重登成功后自动上传。
-- Web 控制台支持搜索、状态筛选、单邮箱重登和批量重登。
+- Web 控制台采用深色侧栏、白色顶栏、状态卡片、账号列表和任务日志双栏布局。
+- Web 控制台支持搜索、状态筛选、单邮箱重登、批量重登、最近任务恢复和日志自动刷新。
 - 批量重登使用队列，重登核心流程固定 1 并发，避免多个浏览器/Sentinel 会话互相影响。
 - 全量同步需要手动触发，不会自动定时扫描远端。
 
@@ -145,7 +146,7 @@ bash scripts/deploy.sh
 3. 在 **邮箱列表** 中搜索邮箱、手机号或失败原因。
 4. 单个邮箱点击 **重登**。
 5. 多个邮箱先勾选，再点击 **批量重登**。
-6. 查看 **任务** 区域的进度条和日志。
+6. 查看 **任务日志** 区域的进度条和日志；刷新页面后可以点击 **恢复最近日志**。
 
 批量重登说明：
 
@@ -214,6 +215,7 @@ python -m unittest discover -s tests
 ├── providers.py           # CPA/Sub2API 远端适配
 ├── cpa_provider.py        # CPA OAuth callback 上传
 ├── sentinel.py            # Sentinel token 提取
+├── templates/index.html   # Web 控制台页面模板
 ├── scripts/deploy.sh      # 服务器一键部署脚本
 ├── config.example.json    # JSON 配置示例
 ├── .env.example           # 一键部署环境变量示例
