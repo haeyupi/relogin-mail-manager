@@ -27,6 +27,28 @@
       --violet-soft:#ede9fe;
       --shadow:0 16px 40px rgba(15, 23, 42, .08);
     }
+    body.theme-dark {
+      color-scheme: dark;
+      --bg:#090f1d;
+      --panel:#101827;
+      --panel-2:#0b1220;
+      --ink:#e5edf8;
+      --muted:#9aa7bb;
+      --soft:#748196;
+      --line:#263246;
+      --dark:#111827;
+      --blue:#3b82f6;
+      --blue-soft:#1e3a8a;
+      --green:#34d399;
+      --green-soft:#064e3b;
+      --amber:#fbbf24;
+      --amber-soft:#451a03;
+      --red:#fca5a5;
+      --red-soft:#450a0a;
+      --violet:#c4b5fd;
+      --violet-soft:#312e81;
+      --shadow:0 18px 42px rgba(0, 0, 0, .28);
+    }
     * { box-sizing:border-box; }
     html, body { max-width:100%; overflow-x:hidden; }
     body {
@@ -52,6 +74,10 @@
     button.blue { background:var(--blue); border-color:var(--blue); }
     button.danger { background:#fff; color:var(--red); border-color:#f5b5ae; }
     button:disabled { opacity:.52; cursor:not-allowed; }
+    body.theme-dark button { background:#e5edf8; color:#0b1220; border-color:#e5edf8; }
+    body.theme-dark button.secondary { background:#0b1220; color:var(--ink); border-color:#334155; }
+    body.theme-dark button.blue { background:var(--blue); color:#fff; border-color:var(--blue); }
+    body.theme-dark button.danger { background:#0b1220; color:var(--red); border-color:#7f1d1d; }
     input, select {
       width:100%;
       height:36px;
@@ -66,52 +92,10 @@
     input:focus, select:focus { border-color:#93c5fd; box-shadow:0 0 0 3px rgba(37, 99, 235, .12); }
     input[type="checkbox"] { width:16px; height:16px; padding:0; accent-color:var(--blue); }
     input[type="file"] { padding:6px 10px; }
+    body.theme-dark input, body.theme-dark select { background:#0b1220; color:var(--ink); }
+    body.theme-dark input::placeholder { color:#64748b; }
     label { display:grid; gap:6px; color:var(--muted); font-size:12px; }
-    .layout { width:100%; max-width:100vw; min-height:100vh; display:grid; grid-template-columns:224px minmax(0,1fr); overflow:hidden; }
-    .sidebar {
-      background:#0f172a;
-      color:#e5e7eb;
-      padding:18px 14px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
-    .brand { display:flex; align-items:center; gap:11px; padding:4px 6px 14px; border-bottom:1px solid rgba(255,255,255,.09); }
-    .brand-mark {
-      width:34px;
-      height:34px;
-      display:grid;
-      place-items:center;
-      border-radius:8px;
-      background:#2563eb;
-      font-weight:800;
-    }
-    .brand strong { display:block; font-size:15px; }
-    .brand span { display:block; color:#9ca3af; font-size:12px; margin-top:2px; }
-    .nav { display:grid; gap:6px; }
-    .nav a {
-      display:flex;
-      align-items:center;
-      gap:9px;
-      height:36px;
-      padding:0 10px;
-      color:#cbd5e1;
-      text-decoration:none;
-      border-radius:6px;
-    }
-    .nav a.active { background:#1e293b; color:#fff; }
-    .nav-dot { width:7px; height:7px; border-radius:999px; background:#60a5fa; }
-    .side-note {
-      margin-top:auto;
-      border:1px solid rgba(255,255,255,.1);
-      border-radius:8px;
-      padding:10px;
-      color:#cbd5e1;
-      display:grid;
-      gap:6px;
-      font-size:12px;
-    }
-    .side-note code { color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .layout { width:100%; max-width:100vw; min-height:100vh; overflow:hidden; }
     .workspace { min-width:0; width:100%; max-width:100%; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto 1fr; overflow:hidden; }
     .topbar {
       width:100%;
@@ -130,6 +114,25 @@
     h1 { margin:0; font-size:22px; line-height:1.15; }
     h2 { margin:0; font-size:15px; }
     .top-actions { display:flex; align-items:center; gap:10px; min-width:0; }
+    .theme-toggle {
+      width:38px;
+      padding:0;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+    }
+    .theme-icon {
+      width:18px;
+      height:18px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .theme-icon-sun { display:none; }
+    body.theme-dark .theme-icon-moon { display:none; }
+    body.theme-dark .theme-icon-sun { display:block; }
     .chip {
       max-width:420px;
       min-width:0;
@@ -146,6 +149,12 @@
       white-space:nowrap;
       font-size:12px;
     }
+    body.theme-dark .topbar,
+    body.theme-dark .panel,
+    body.theme-dark .stat,
+    body.theme-dark .account-scroll,
+    body.theme-dark .chip { background:var(--panel); }
+    body.theme-dark .chip { color:var(--muted); }
     .content { width:100%; min-width:0; max-width:100%; padding:18px 24px 30px; display:grid; gap:16px; }
     .panel {
       background:var(--panel);
@@ -170,6 +179,94 @@
     .field-action { display:flex; align-items:end; }
     .toolbar { display:flex; flex-wrap:wrap; gap:9px; align-items:end; }
     .status-line { color:var(--muted); font-size:13px; min-height:18px; }
+    .import-form {
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:12px;
+      align-items:stretch;
+    }
+    .dropzone {
+      min-height:112px;
+      border:1.5px dashed #b8c3d4;
+      border-radius:8px;
+      padding:16px;
+      display:grid;
+      grid-template-columns:auto minmax(0,1fr);
+      gap:13px;
+      align-items:center;
+      background:linear-gradient(135deg, #f8fbff, #ffffff);
+      color:var(--ink);
+      cursor:pointer;
+      transition:border-color .16s, background .16s, box-shadow .16s, transform .16s;
+    }
+    .dropzone:hover,
+    .dropzone:focus-visible,
+    .dropzone.dragging {
+      border-color:var(--blue);
+      background:linear-gradient(135deg, #eef6ff, #ffffff);
+      box-shadow:0 0 0 4px rgba(37, 99, 235, .10);
+      outline:none;
+    }
+    .dropzone.dragging { transform:translateY(-1px); }
+    .drop-icon {
+      width:46px;
+      height:46px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      background:var(--blue-soft);
+      color:var(--blue);
+    }
+    .drop-icon svg {
+      width:22px;
+      height:22px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .drop-copy {
+      min-width:0;
+      display:grid;
+      gap:6px;
+    }
+    .drop-title { font-weight:700; font-size:15px; color:var(--ink); }
+    .drop-subtitle { color:var(--muted); font-size:12px; }
+    .drop-file {
+      min-height:18px;
+      color:var(--blue);
+      font-size:12px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .file-input-hidden {
+      position:absolute;
+      width:1px;
+      height:1px;
+      opacity:0;
+      pointer-events:none;
+    }
+    .import-actions {
+      min-width:150px;
+      display:grid;
+      gap:8px;
+      align-content:center;
+    }
+    .import-actions button { width:100%; }
+    body.theme-dark .dropzone {
+      border-color:#334155;
+      background:linear-gradient(135deg, #0b1220, #101827);
+    }
+    body.theme-dark .dropzone:hover,
+    body.theme-dark .dropzone:focus-visible,
+    body.theme-dark .dropzone.dragging {
+      border-color:var(--blue);
+      background:linear-gradient(135deg, #0f1f3a, #101827);
+      box-shadow:0 0 0 4px rgba(59, 130, 246, .14);
+    }
+    body.theme-dark .drop-icon { background:#172554; color:#93c5fd; }
     .summary {
       display:grid;
       grid-template-columns:repeat(5,minmax(120px,1fr));
@@ -224,6 +321,7 @@
       font-size:12px;
       font-weight:600;
     }
+    body.theme-dark th { background:#0b1220; }
     tr:last-child td { border-bottom:0; }
     th.select, td.select { width:42px; text-align:center; }
     .email-cell {
@@ -246,6 +344,7 @@
     .status-badge.unavailable { color:var(--red); background:var(--red-soft); border-color:#fecaca; }
     .status-badge.unknown { color:var(--violet); background:var(--violet-soft); border-color:#ddd6fe; }
     .remote-cell { color:#344054; }
+    body.theme-dark .remote-cell { color:#cbd5e1; }
     .failure-cell {
       color:var(--muted);
       white-space:normal;
@@ -272,6 +371,7 @@
     .job-meta span { display:block; color:var(--muted); font-size:12px; }
     .job-meta strong { display:block; margin-top:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .progress { height:9px; border-radius:999px; background:#edf2f7; overflow:hidden; }
+    body.theme-dark .progress { background:#1f2937; }
     .bar { height:100%; width:0; background:linear-gradient(90deg,#2563eb,#10b981); transition:width .2s; }
     pre {
       margin:0;
@@ -288,8 +388,6 @@
     }
     .empty-row { color:var(--muted); text-align:center; height:86px; }
     @media (max-width:1180px) {
-      .layout { display:block; }
-      .sidebar { display:none; }
       .two-col { grid-template-columns:1fr; }
       .summary { grid-template-columns:repeat(3,minmax(120px,1fr)); }
     }
@@ -300,6 +398,8 @@
       .content { padding:14px; }
       .grid { grid-template-columns:1fr 1fr; }
       .field-wide { grid-column:span 2; }
+      .import-form { grid-template-columns:1fr; }
+      .import-actions { min-width:0; grid-template-columns:1fr auto; align-items:center; }
       .table-tools { grid-template-columns:minmax(0,1fr) minmax(0,1fr); width:100%; }
       .table-tools > * { min-width:0; }
       .table-tools button { width:100%; padding:0 8px; }
@@ -317,6 +417,10 @@
       .panel-head { align-items:flex-start; flex-direction:column; }
       .panel-head .toolbar { width:100%; }
       .panel-head .toolbar button { flex:1; }
+      .dropzone { grid-template-columns:1fr; min-height:132px; text-align:center; justify-items:center; }
+      .drop-copy { justify-items:center; }
+      .drop-file { max-width:100%; }
+      .import-actions { grid-template-columns:1fr; }
       .table-tools { grid-template-columns:1fr; }
       .job-meta { grid-template-columns:1fr; }
     }
@@ -324,21 +428,6 @@
 </head>
 <body>
   <div class="layout">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">R</div>
-        <div><strong>Relogin</strong><span>Mail Manager</span></div>
-      </div>
-      <nav class="nav">
-        <a class="active" href="#overview"><span class="nav-dot"></span>控制台</a>
-        <a href="#accounts"><span class="nav-dot"></span>邮箱列表</a>
-        <a href="#logs"><span class="nav-dot"></span>任务日志</a>
-      </nav>
-      <div class="side-note">
-        <span>Mail DB</span>
-        <code id="sideDbPath">loading</code>
-      </div>
-    </aside>
     <div class="workspace">
       <header class="topbar">
         <div>
@@ -348,6 +437,22 @@
         <div class="top-actions">
           <span class="chip" id="dbPath">loading</span>
           <span class="chip" id="syncStatus">就绪</span>
+          <button type="button" class="secondary theme-toggle" id="themeToggle" aria-label="切换到夜间模式" title="夜间模式">
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 7.5 7.5 0 1 0 20.5 14.5Z"></path>
+            </svg>
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </button>
         </div>
       </header>
       <main class="content">
@@ -367,6 +472,7 @@
               </label>
               <label class="field-wide">地址<input name="base_url" placeholder="https://example.com"></label>
               <label class="field-wide">管理密钥<input name="management_key" type="password" placeholder="留空则不改"></label>
+              <label class="field-wide">Web 登录密码<input name="web_password" type="password" placeholder="留空则不改"></label>
               <label>Sub2API 并发<input name="sub2api_concurrency" type="number" min="1" max="50"></label>
               <label>Sub2API 优先级<input name="sub2api_priority" type="number" min="1" max="1000"></label>
               <div class="field-action"><button type="submit" class="blue">保存配置</button></div>
@@ -383,12 +489,26 @@
             </div>
           </div>
           <div class="panel-body">
-            <form id="importForm" class="toolbar">
-              <label class="field-wide">原项目导出 ZIP
-                <input name="file" id="zipFile" type="file" accept=".zip" required>
-              </label>
-              <div class="field-action"><button type="submit">导入 ZIP</button></div>
-              <span class="status-line" id="importStatus"></span>
+            <form id="importForm" class="import-form">
+              <div class="dropzone" id="zipDropzone" role="button" tabindex="0" aria-label="选择或拖入原项目导出 ZIP">
+                <div class="drop-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <path d="M17 8 12 3 7 8"></path>
+                    <path d="M12 3v12"></path>
+                  </svg>
+                </div>
+                <div class="drop-copy">
+                  <div class="drop-title">原项目导出 ZIP</div>
+                  <div class="drop-subtitle">拖入文件或点击选择，仅接受 .zip</div>
+                  <div class="drop-file" id="zipFileName">未选择文件</div>
+                </div>
+                <input class="file-input-hidden" name="file" id="zipFile" type="file" accept=".zip">
+              </div>
+              <div class="import-actions">
+                <button type="submit">导入 ZIP</button>
+                <span class="status-line" id="importStatus"></span>
+              </div>
             </form>
             <div class="summary" id="summary"></div>
           </div>
@@ -474,6 +594,45 @@
     function setStatus(message) { $("syncStatus").textContent = message || "就绪"; }
     function setConfigStatus(message) { $("configStatus").textContent = message || ""; }
     function setImportStatus(message) { $("importStatus").textContent = message || ""; }
+    function formatFileSize(size) {
+      if (!Number.isFinite(size)) return "";
+      if (size < 1024) return `${size} B`;
+      if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
+      return `${(size / 1024 / 1024).toFixed(1)} MB`;
+    }
+    function selectedZipFile() {
+      return $("zipFile").files && $("zipFile").files.length ? $("zipFile").files[0] : null;
+    }
+    function updateZipFileState() {
+      const file = selectedZipFile();
+      $("zipFileName").textContent = file ? `${file.name} · ${formatFileSize(file.size)}` : "未选择文件";
+    }
+    function assignDroppedFile(fileList) {
+      if (!fileList || !fileList.length) return;
+      const file = fileList[0];
+      if (!file.name.toLowerCase().endsWith(".zip")) {
+        setImportStatus("请选择 .zip 文件");
+        return;
+      }
+      const transfer = new DataTransfer();
+      transfer.items.add(file);
+      $("zipFile").files = transfer.files;
+      updateZipFileState();
+      setImportStatus("");
+    }
+    function applyTheme(theme) {
+      const normalized = theme === "dark" ? "dark" : "light";
+      document.body.classList.toggle("theme-dark", normalized === "dark");
+      const nextLabel = normalized === "dark" ? "切换到日间模式" : "切换到夜间模式";
+      $("themeToggle").setAttribute("aria-label", nextLabel);
+      $("themeToggle").setAttribute("title", normalized === "dark" ? "日间模式" : "夜间模式");
+      try { window.localStorage.setItem("mailReloginTheme", normalized); } catch (_) {}
+    }
+    function initTheme() {
+      let saved = "light";
+      try { saved = window.localStorage.getItem("mailReloginTheme") || "light"; } catch (_) {}
+      applyTheme(saved);
+    }
     async function api(url, options={}) {
       const res = await fetch(url, options);
       const data = await res.json().catch(() => ({}));
@@ -524,12 +683,12 @@
     }
     function fillConfig(data) {
       $("dbPath").textContent = data.config.mail_db;
-      $("sideDbPath").textContent = data.config.mail_db;
       const target = data.config.target;
       const form = $("configForm");
       form.provider.value = target.provider || "";
       form.base_url.value = target.base_url || "";
       form.management_key.placeholder = target.management_key_masked || "留空则不改";
+      form.web_password.placeholder = data.config.web?.password_masked || "留空则不改";
       form.sub2api_concurrency.value = target.sub2api_concurrency || 3;
       form.sub2api_priority.value = target.sub2api_priority || 50;
     }
@@ -691,17 +850,46 @@
       const fd = new FormData(ev.currentTarget);
       await api("/api/config", {method:"POST", body:fd});
       ev.currentTarget.management_key.value = "";
+      ev.currentTarget.web_password.value = "";
       await loadState({quiet:true});
       setConfigStatus(`已保存 ${new Date().toLocaleTimeString()}`);
     };
     $("importForm").onsubmit = async ev => {
       ev.preventDefault();
+      if (!selectedZipFile()) {
+        setImportStatus("请先选择 ZIP 文件");
+        return;
+      }
       setImportStatus("导入中...");
       await api("/api/import-zip", {method:"POST", body:new FormData(ev.currentTarget)});
       ev.currentTarget.reset();
+      updateZipFileState();
       await loadState({quiet:true});
       setImportStatus(`导入完成 ${new Date().toLocaleTimeString()}`);
     };
+    $("zipFile").onchange = () => { updateZipFileState(); setImportStatus(""); };
+    $("zipDropzone").onclick = ev => {
+      if (ev.target !== $("zipFile")) $("zipFile").click();
+    };
+    $("zipDropzone").onkeydown = ev => {
+      if (ev.key === "Enter" || ev.key === " ") {
+        ev.preventDefault();
+        $("zipFile").click();
+      }
+    };
+    ["dragenter", "dragover"].forEach(type => {
+      $("zipDropzone").addEventListener(type, ev => {
+        ev.preventDefault();
+        $("zipDropzone").classList.add("dragging");
+      });
+    });
+    ["dragleave", "drop"].forEach(type => {
+      $("zipDropzone").addEventListener(type, ev => {
+        ev.preventDefault();
+        $("zipDropzone").classList.remove("dragging");
+      });
+    });
+    $("zipDropzone").ondrop = ev => assignDroppedFile(ev.dataTransfer.files);
     $("syncBtn").onclick = () => startSyncStatus().catch(showError);
     $("refreshBtn").onclick = async () => {
       try {
@@ -726,6 +914,9 @@
       updateSelectionUi();
     };
     $("batchReloginBtn").onclick = () => startBatchRelogin().catch(showError);
+    $("themeToggle").onclick = () => applyTheme(document.body.classList.contains("theme-dark") ? "light" : "dark");
+    initTheme();
+    updateZipFileState();
     let searchTimer = 0;
     $("search").oninput = () => {
       window.clearTimeout(searchTimer);

@@ -1108,6 +1108,7 @@ def api_config():
     provider = str(payload.get("provider") or "").strip().lower()
     base_url = str(payload.get("base_url") or "").strip()
     key = str(payload.get("management_key") or "").strip()
+    new_web_password = str(payload.get("web_password") or "").strip()
     target = {
         "provider": provider,
         "base_url": base_url,
@@ -1115,7 +1116,15 @@ def api_config():
         "sub2api_concurrency": int(payload.get("sub2api_concurrency") or existing_target["sub2api_concurrency"]),
         "sub2api_priority": int(payload.get("sub2api_priority") or existing_target["sub2api_priority"]),
     }
-    updated = save_config_patch({"target": target})
+    patch = {"target": target}
+    if new_web_password:
+        current_web = cfg.get("web") or {}
+        patch["web"] = {
+            "host": current_web.get("host") or "127.0.0.1",
+            "port": int(current_web.get("port") or 8787),
+            "password": new_web_password,
+        }
+    updated = save_config_patch(patch)
     relogin.configure(updated)
     return jsonify({"ok": True, "config": config_view(updated)})
 
