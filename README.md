@@ -227,6 +227,10 @@ python -m unittest discover -s tests
 - 定期备份 `data/` 和 `tokens/`，但不要上传到公开仓库。
 - 不要在 issue、日志或截图中公开邮箱 refresh token、OpenAI token、管理密钥或真实账号密码。
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=haeyupi/relogin-mail-manager&type=Date)](https://www.star-history.com/#haeyupi/relogin-mail-manager&Date)
+
 ## 友情链接
 
 - [Linux.do](https://linux.do/)
