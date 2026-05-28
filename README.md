@@ -15,9 +15,9 @@ Relogin Mail Manager 是一个本地化的 OpenAI/Codex 重新登录工具。它
 - 批量重登使用队列，重登核心流程固定 1 并发，避免多个浏览器/Sentinel 会话互相影响。
 - 全量同步需要手动触发，不会自动定时扫描远端。
 
-## 不要提交隐私文件
+## 运行时数据
 
-这些文件和目录包含邮箱、密码、refresh token 或 OpenAI token，已经在 `.gitignore` 和 `.dockerignore` 中排除：
+项目仓库只包含源码、示例配置和文档。部署脚本会在本地生成运行所需的配置和数据目录：
 
 - `config.json`
 - `.env`
@@ -26,7 +26,7 @@ Relogin Mail Manager 是一个本地化的 OpenAI/Codex 重新登录工具。它
 - `success/`
 - `fail/`
 
-公开仓库中只应包含代码、示例配置和文档。不要把真实 ZIP、数据库、token、日志或管理密钥提交到 GitHub。
+这些路径已经在 `.gitignore` 和 `.dockerignore` 中排除，升级容器时会作为本地数据保留。
 
 ## 准备 ZIP 文件
 
@@ -226,8 +226,8 @@ python -m unittest discover -s tests
 
 - Web 暴露到公网时必须设置强 `WEB_PASSWORD`。
 - 建议把容器绑定到 `127.0.0.1`，再由反向代理提供 HTTPS。
-- 定期备份 `data/` 和 `tokens/`，但不要上传到公开仓库。
-- 不要在 issue、日志或截图中公开邮箱 refresh token、OpenAI token、管理密钥或真实账号密码。
+- 定期备份 `data/` 和 `tokens/`。
+- 分享 issue、日志或截图前，建议先遮挡账号凭据、管理密钥和 token。
 
 ## Star History
 
